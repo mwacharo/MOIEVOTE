@@ -97,58 +97,58 @@ class VoteApiController extends Controller
     // } 
 
      
-    public function result()
-    {
-        $candidates = Candidate::all();
-        $groups = Group::all();
+    // public function result()
+    // {
+    //     $candidates = Candidate::all();
+    //     $groups = Group::all();
     
-        $votes = [];
-        $votes_of_groups = [];
+    //     $votes = [];
+    //     $votes_of_groups = [];
     
-        foreach ($candidates as $candidate) {
-            $count = Vote::where('candidate_id', $candidate->id)
-                ->count();
+    //     foreach ($candidates as $candidate) {
+    //         $count = Vote::where('candidate_id', $candidate->id)
+    //             ->count();
             
-            $votes[$candidate->id] = $count;
-        }
+    //         $votes[$candidate->id] = $count;
+    //     }
         
-        // Sort the votes array in descending order
-        arsort($votes);
+    //     // Sort the votes array in descending order
+    //     arsort($votes);
         
-        foreach ($groups as $group) {
-            $total_count = Vote::where('group_id', $group->id)
-                ->count();
+    //     foreach ($groups as $group) {
+    //         $total_count = Vote::where('group_id', $group->id)
+    //             ->count();
         
-            $votes_of_groups[$group->id] = $total_count;
-        }
+    //         $votes_of_groups[$group->id] = $total_count;
+    //     }
     
-        // Create an array to hold the ranked candidates
-        $ranked_candidates = [];
+    //     // Create an array to hold the ranked candidates
+    //     $ranked_candidates = [];
     
-        // Assign the rank to each candidate based on the sorted votes array
-        $rank = 1;
-        foreach ($votes as $candidate_id => $count) {
-            $candidate = Candidate::find($candidate_id);
+    //     // Assign the rank to each candidate based on the sorted votes array
+    //     $rank = 1;
+    //     foreach ($votes as $candidate_id => $count) {
+    //         $candidate = Candidate::find($candidate_id);
 
-            $candidate_name = $candidate ? $candidate->candidate_name : 'Unknown Candidate';
+    //         $candidate_name = $candidate ? $candidate->candidate_name : 'Unknown Candidate';
 
-            $group_id = $candidate ? $candidate->group_id : null;
+    //         $group_id = $candidate ? $candidate->group_id : null;
 
-            $group_name = $group_id ? Group::find($group_id)->group_name : 'Unknown Group';
-            $ranked_candidates[$rank] = [
-                'candidate_name' => $candidate_name,
-                'group_name' => $group_name,
-                'votes' => $count,
-            ];
-            $rank++;
-        }
+    //         $group_name = $group_id ? Group::find($group_id)->group_name : 'Unknown Group';
+    //         $ranked_candidates[$rank] = [
+    //             'candidate_name' => $candidate_name,
+    //             'group_name' => $group_name,
+    //             'votes' => $count,
+    //         ];
+    //         $rank++;
+    //     }
     
-        return [
-            'votes' => $votes,
-            'votes_of_groups' => $votes_of_groups,
-            'ranked_candidates' => $ranked_candidates,
-        ];
-    }
+    //     return [
+    //         'votes' => $votes,
+    //         'votes_of_groups' => $votes_of_groups,
+    //         'ranked_candidates' => $ranked_candidates,
+    //     ];
+    // }
     
 
     

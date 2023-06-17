@@ -42,12 +42,12 @@ class VoteController extends Controller
      
     public function entertainment(){
         
-        $entertainment = Candidate::where('group_id', '3')->get();
+        $entertainments = Candidate::where('group_id', '3')->get();
         $total_entertainment=Candidate::where('group_id', '3')->count();
          // dd($total_entertainment);
-        //dd($entertainment);
+        //dd($entertainments);
 
-        return view(' entertainment',compact('total_entertainment'));
+        return view(' entertainment',compact('total_entertainment','entertainments'));
 
     }
 
@@ -56,25 +56,25 @@ class VoteController extends Controller
         $presidents = Candidate::where('group_id', '1')->get(); 
         $total_president=Candidate::where('group_id', '1')->count();
 
-
-        
-
         //dd( $presidents);
         return view('president', compact('total_president','presidents'));
     }
     
 
     public function secretary(){
-        $secretary = Candidate::where('group_id', '2')->get();
-       // dd($secretary);
-        return view ('secretary');
+        $secretaries = Candidate::where('group_id', '2')->get();
+        $total_secratary=Candidate::where('group_id', '2')->count();
+        //dd($secretaries);
+         
+        return view ('secretary',compact('secretaries','total_secratary'));
         
     }
 
     public function tresury(){
-        $tresury = Candidate::where('group_id', '4')->get();
-        //dd($tresury );
-        return view ('tresury');
+        $tresurys= Candidate::where('group_id', '4')->get();
+        $total_tresury=Candidate::where('group_id', '4')->count();
+         //dd($tresurys );
+        return view ('tresury',compact('total_tresury','tresurys'));
         
     }
     /**
@@ -148,8 +148,27 @@ class VoteController extends Controller
              return json_encode($json_array);
          }
  
-      
+        // Redirect to /index route
+    return redirect('/index');
      } 
+
+     public function result()
+     {
+         $candidates = Candidate::all();
+         $groups = Group::all();
+         $votes = Vote::all();
+        $voteCounts = [];
+
+    // Calculate vote count for each candidate
+    foreach ($candidates as $candidate) {
+        $total_votes = $votes->where('candidate_id', $candidate->id)->count();
+        $voteCounts[$candidate->id] = $total_votes;
+    }
+    //dd(compact('votes','candidates','voteCounts'));
+         return view('result',compact('votes','candidates','voteCounts'));
+     
+    }
+     
 
     /**
      * Store a newly created resource in storage.

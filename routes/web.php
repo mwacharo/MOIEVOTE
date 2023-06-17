@@ -37,7 +37,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/index', [VoteController::class, 'index'])->name('vote.index');
     Route::get('/candidate-create', [CandidateController::class, 'create'])->name('candidate.create'); 
     Route::post('/candidate-store', [CandidateController::class, 'store'])->name('candidate.store'); 
-    Route::post('/vote/create', [VoteController::class, 'create'])->name('vote.create'); 
+    Route::get('/result', [VoteController::class, 'result'])->name('vote.result');
+     Route::post('/vote-create', [VoteController::class, 'create'])->name('vote.create');
+    
+
     
     
 });
