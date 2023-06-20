@@ -7,11 +7,17 @@ use \App\Models\Candidate;
 use \App\Models\Group;
 use \App\Models\User;
 use \App\Models\Vote;
+use Carbon\Carbon;
+
 class VoteController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * 
+     * 
      */
+
+     
     public function index()
     {
         //
@@ -30,12 +36,19 @@ class VoteController extends Controller
 
 
 
+            $date = Carbon::now();
+           $formattedTime = $date->format('H:i:s');
+        //    echo "Current time: $formattedTime";
+
+
+
+
         
 
       //dd($total_candidates);
 
        // dd($candidates);
-        return view('index',compact('total_candidates','total_positions','registerd_voters','presidents','secretary','tresury','entertainment','presidents_cast','secretary_cast','entertainment_cast','tresury_cast'));
+        return view('index',compact('total_candidates','total_positions','registerd_voters','presidents','secretary','tresury','entertainment','presidents_cast','secretary_cast','entertainment_cast','tresury_cast','date'));
     }
 
 

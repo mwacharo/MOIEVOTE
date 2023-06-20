@@ -21,6 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
+    
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -33,8 +34,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/entertainment', [VoteController::class, 'entertainment'])->name('vote.entertainment');
     Route::get('/president', [VoteController::class, 'president'])->name('vote.president');
     Route::get('/secretary', [VoteController::class, 'secretary'])->name('vote.secretary');
-    Route::get('/tresury', [VoteController::class, 'tresury'])->name('vote.tresury');
+    Route::get('/tresury', [VoteController::class, 'tresury'])->name('vote.tresury'); 
+
+
+
     Route::get('/index', [VoteController::class, 'index'])->name('vote.index');
+
+    
     Route::get('/candidate-create', [CandidateController::class, 'create'])->name('candidate.create'); 
     Route::post('/candidate-store', [CandidateController::class, 'store'])->name('candidate.store'); 
     Route::get('/result', [VoteController::class, 'result'])->name('vote.result');

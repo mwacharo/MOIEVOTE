@@ -83,6 +83,8 @@
         <p>Presidency</p>
         <p class="time">june, 20</p>
       </div>
+
+      
       <div class="projects-section-line">
         <div class="projects-status">
           <div class="item-status">
